@@ -1,17 +1,16 @@
 // type
 // payload
 
-import { type } from "os";
 import { ADD_TODO, DEL_TODO, UPDATE_TODO } from "./actionsTypes";
 import { ITodo } from "../../interfaces";
 
 // add todo
-export const addTodo = (todo: ITodo) => ({
+export const addTodo = (todo: any) => ({
   type: ADD_TODO,
   payload: todo,
 });
 // del todo
-export const delTodo = (id: number) => ({
+export const delTodo = (id: string) => ({
   type: DEL_TODO,
   payload: id,
 });

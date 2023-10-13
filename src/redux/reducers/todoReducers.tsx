@@ -3,16 +3,14 @@
 
 import { stat } from "fs";
 import { ADD_TODO, DEL_TODO, UPDATE_TODO } from "../actions/actionsTypes";
+import { ITodo } from "../../interfaces";
 
 // 2. action
 const initialState: [] = [];
-export default (
+export const todoReducers = (
   state = initialState,
   action: { type: string; payload: any }
-  ) => {
-    console.log('state: ', state);
-    console.log('action: ', action);
-
+) => {
   switch (action.type) {
     case ADD_TODO:
       return [...state, action.payload];

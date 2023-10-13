@@ -5,28 +5,20 @@ import MyButton from "./MyButton";
 import DisplayTodo from "./DisplayTodo";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_TODO } from "../redux/actions/actionsTypes";
-
+import { addTodo } from "../redux/actions/todo";
+import { ITodo } from "../interfaces";
+import { v4 as uuid } from "uuid";
 const AddTodo = () => {
   const [todoTitle, setTodoTitle] = useState("");
   const [todoDesc, setTodoDesc] = useState("");
-  const selectedData = useSelector((state: any) => state.todoReducers);
-  console.log("selectedData: ", selectedData);
   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     console.log("todoDesc: ", todoDesc);
-  //     console.log("todoTitle: ", todoTitle);
-  //   }, [todoTitle, todoDesc]);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("todoDesc: ", todoDesc);
-    console.log("todoTitle: ", todoTitle);
+
     // set todo to store
     setTodoTitle("");
     setTodoDesc("");
-    dispatch({
-      type: ADD_TODO,
-      payload: { title: todoTitle, description: todoDesc },
-    });
+    dispatch(addTodo({ title: todoTitle, desc: todoDesc, id: uuid() }));
   };
   return (
     <>
@@ -35,13 +27,14 @@ const AddTodo = () => {
           <Col>
             <Card className="shadow-sm">
               <Card.Body>
-                <h3>Add Todo !!</h3>
+                <h3>Add Todo</h3>
                 <Form onSubmit={handleSubmit}>
                   {/* title */}
                   <MyInput
                     label="Todo Title"
                     type="text"
                     placeholder="Enter here"
+                    // @ts-ignore
                     value={todoTitle}
                     requiredField={true}
                     setValue={setTodoTitle}
